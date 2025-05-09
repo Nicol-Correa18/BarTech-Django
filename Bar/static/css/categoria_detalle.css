@@ -1,0 +1,151 @@
+#categoria-detalle {
+    display: flex;
+    justify-content: center;
+}
+.product-grid {
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas de igual ancho */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    padding: 20px; /* Espaciado interno alrededor de la cuadrícula */
+    justify-content: center; /* Centra la cuadrícula horizontalmente */
+}
+
+.product-item {
+    background-color: #3B2C23; /* Fondo oscuro */
+    border: 2px solid #9B7A59; /* Borde consistente */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+    text-align: center;
+    padding: 8px; /* Espaciado interno */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    width: 265px; /* Asegura que las tarjetas ocupen todo el espacio disponible */
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén apilados */
+    justify-content: space-between; /* Espaciado uniforme entre los elementos */
+}
+
+.product-item:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.product-item img {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: 250px; /* Altura fija para mantener consistencia */
+    object-fit: cover; /* Ajusta la imagen sin distorsión */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 10px; /* Espaciado debajo de la imagen */
+}
+
+.product-item h2 {
+    margin: 10px 0;
+    font-size: 18px; /* Tamaño de fuente */
+    color: #F3E5D7; /* Color claro para el texto */
+}
+
+.product-item p {
+    font-size: 16px;
+    color: #D7B89E; /* Color consistente con el diseño general */
+    margin: 5px 0;
+}
+
+.product-item .btn {
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.product-item .btn:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F3E5D7;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 120px;
+    height: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrapper span {
+font-size: 20px;
+font-weight: 600;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 30px;
+height: 30px;
+color: #3B2C23;
+}
+
+.wrapper span.num {
+font-size: 20px;
+border-right: 2px solid rgba(0, 0, 0, 0.2);
+border-left: 2px solid rgba(0, 0, 0, 0.2);
+padding: 0 10px;
+min-width: 40px;
+text-align: center;
+color: #3B2C23;
+}
+
+button,
+a button {
+padding: 10px 20px;
+background: linear-gradient(to right, #A2653B, #9B7A59);
+border-radius: 10px;
+color: #F3E5D7;
+border: none;
+cursor: pointer;
+font-size: 16px;
+transition: all 0.3s ease;
+box-shadow: 0 4px 10px rgba(162, 101, 59, 0.5);
+}
+
+button:hover,
+a button:hover {
+background: linear-gradient(to right, #9B7A59, #A2653B);
+transform: scale(1.1);
+box-shadow: 0 6px 15px rgba(155, 122, 89, 0.6);
+}
+
+/* Responsividad */
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas para pantallas medianas */
+    }
+}
+
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas para tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* 1 columna para pantallas pequeñas */
+    }
+}

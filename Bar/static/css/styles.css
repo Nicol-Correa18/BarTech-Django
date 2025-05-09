@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #F3E5D7;
+  }
+  
+  body {
+    background-image: linear-gradient(135deg, #3B2C23, #1C1C1C);
+    padding: 90px;
+    min-height: 100vh;
+  }
+
+
+  
+  h1 {
+    text-align: center;
+    color: #F3E5D7;
+    margin-bottom: 25px;
+  }
+  
+  .menu-icon,
+  .carrito-icon {
+    font-size: 45px;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    color: #F3E5D7;
+  }
+  
+  .menu-icon {
+    left: 25px;
+  }
+  
+  .carrito-icon {
+    right: 20px;
+    text-decoration: none;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .search-icon {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #D7B89E;
+  }
+  
+  #searchInput {
+    padding: 10px 15px;
+    width: 250px;
+    background-color: #1C1C1C;
+    border: 2px solid #9B7A59;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    color: #F3E5D7;
+    transition: 0.3s;
+  }
+  
+  #searchInput:focus {
+    border-color: #A2653B;
+    background-color: #2A1F1A;
+    box-shadow: 0 0 8px rgba(162, 101, 59, 0.5);
+  }
+  
+  .product-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 25px;
+  }
+  
+  .product-item {
+    background-color: #3B2C23;
+    border: 2px solid #9B7A59;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 8px;
+    flex: 0 0 auto;
+    width: 265px;
+    transition: transform 0.3s;
+  }
+  
+  .product-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .product-item img {
+    width: 245px;
+    height: 245px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  .product-item h2 {
+    margin: 15px 0;
+    font-size: 30px;
+    color: #F3E5D7;
+  }
+  
+  .btn, .custom-button {
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .btn:hover, .custom-button:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+  }
+  
+  .custom-button a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .menu {
+    margin: 40px auto;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .menu ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .terms-section {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .terms-section a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #D7B89E;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .terms-section a:hover {
+    text-decoration: underline;
+    color: #F3E5D7;
+  }
+  
+  /* Modales */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .modal-contenido, .modal-content {
+    background-color: #3B2C23;
+    border: 2px solid #9B7A59;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    color: #F3E5D7;
+  }
+  
+  .cerrar, .close {
+    color: #D7B89E;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+ 

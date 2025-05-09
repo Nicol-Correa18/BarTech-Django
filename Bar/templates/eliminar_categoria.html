@@ -1,0 +1,51 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categoría</title>
+    <link rel="stylesheet" href="{% static 'css/nueva_categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+<h1>Lista de Categorías</h1>
+{% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+<div class="inventory-container">
+    <div class="menu-icon" onclick="toggleMenu()"></div>
+    <div id="overlay"></div>
+  </div>
+  <div class="menu">
+    <ul>
+        <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+    </ul>
+  </div>
+<h1>Eliminar Categoría</h1>
+<p>¿Estás seguro que deseas eliminar la categoría "{{ categoria.nombre }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <button type="submit" class="btn btn-danger"><a href="{% url 'listar_categoria' %}" class="btn btn-secondary">Cancelar</a></button>
+</form>
+{% endblock %}
+<script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

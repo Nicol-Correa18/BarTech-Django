@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+body {
+    background-image: linear-gradient(135deg, #3B2C23, #1C1C1C); 
+    color: #F3E5D7;     
+    text-align: center;
+    padding: 20px;
+}
+
+
+
+header h1 {
+    color: #F3E5D7;
+    font-size: 24px;
+}
+
+.filtro input {
+    width: 60%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #F3E5D7;
+    text-align: center;
+    outline: none;
+    transition: 0.3s;
+}
+
+.filtro input:hover,
+.filtro input:focus {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.formulario {
+    max-width: 400px;
+    margin: 0 auto 20px;
+    background: #1C1C1C;
+    padding: 20px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.formulario h2 {
+    margin-bottom: 15px;
+    color: #F3E5D7;
+}
+
+.formulario input,
+.formulario select,
+.formulario button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.formulario input,
+.formulario select {
+    background: #9B7A59;
+    color: #1C1C1C;
+    text-align: center;
+}
+
+.formulario input:hover,
+.formulario select:hover,
+.formulario input:focus,
+.formulario select:focus {
+    background: #D7B89E;
+}
+
+.btn, .custom-button {
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .btn:hover, .custom-button:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+  }
+  
+  .custom-button a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: #F3E5D7;
+    background: #1C1C1C;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba(243, 229, 215, 0.2);
+}
+
+th {
+    background: linear-gradient(to right, #9B7A59, #A2653B);
+    color: white;
+    text-transform: uppercase;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alerta-stock {
+    background-color: #ffeb3b;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}

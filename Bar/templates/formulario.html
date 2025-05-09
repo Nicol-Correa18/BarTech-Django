@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nuevo Producto</title>
+    <link rel="stylesheet" href="{% static 'css/formulario_producto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <script>
+        function cerrarYRecargar() {
+            if (window.opener) {
+                window.opener.location.reload();
+                window.close();
+            }
+        }
+
+        function volverALista() {
+            if (window.opener) {
+                window.opener.location.reload();
+                window.close();
+            } else {
+                window.location.href = "{% url 'index' %}";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Agregar Nuevo Producto</h1>
+    {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+
+    {% if registrado %}
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+            Se ha registrado correctamente
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" onsubmit="setTimeout(cerrarYRecargar, 100);">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <br>
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ categoria.nombre }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/categoria_detalle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    <header><h1>{{ categoria.nombre }}</h1></header>
+
+    <div class="inventory-container">
+        <div class="menu-icon" onclick="toggleMenu()"></div>
+        <div id="overlay"></div>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+      </ul>
+      </div>
+      {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+    <div id="categoria-detalle">
+        <div class="product-grid">
+            {% if productos %}
+            {% for producto in productos %}
+            <form method="post" action="{% url 'agregar_producto_carrito' %}">
+                {% csrf_token %}
+                <div class="product-item">
+                    <img src="{{ producto.foto.url }}" alt="{{ producto.nombre }}">
+                    <h2>{{ producto.nombre }}</h2>
+                    <p>Precio: ${{ producto.precio }}</p>
+                    <p>Stock: {{ producto.stock }}</p>
+                    <input type="hidden" name="producto_id" value="{{ producto.id }}">
+                    <div class="wrapper">
+                        <span class="minus">-</span>
+                        <span class="num">01</span>
+                        <span class="plus">+</span>
+                    </div>
+                    <input type="hidden" name="cantidad" value="1" class="cantidad-input">
+                    <button type="submit">Añadir al carrito</button>
+                </div>
+            </form>
+            {% endfor %}
+            {% else %}
+                <h2>No hay productos en esta categoría</h2>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{% static 'js/mensajes.js' %}"></script>
+    <script src="{% static 'js/contador.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- crear_categoria.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Categoría</title>
+    <link rel="stylesheet" href="{% static 'css/formulario_producto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Nueva Categoría</h1>
+    </header>
+
+    <div class="inventory-container">
+        <div class="menu-icon" onclick="toggleMenu()"></div>
+        <div id="overlay"></div>
+      </div>
+      <div class="menu">
+        <ul>
+            <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+        </ul>
+      </div>
+      {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  
+            <div class="botones">
+                <button type="submit" class="guardar">Guardar</button>
+                <button type="button" class="cancelar" onclick=`window.location.href="{% url 'index' %}"`>Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/contador.js' %}"></script>
+<script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

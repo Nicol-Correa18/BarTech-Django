@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <form method="post" class="form">
+            {% csrf_token %}
+            <h1 class="title">Inicio</h1>
+            <div class="inp">
+                <input type="text" name="correo" class="input" placeholder="Correo" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="inp">
+                <input type="password" name="clave" class="input" placeholder="Contraseña" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <br>
+            <button type="submit" class="submit">Iniciar Sesión</button>
+            <a href="{% url 'password_reset_request' %}" class="link">Recuperar Contraseña</a>
+            <a href="{% url 'primera' %}" class="link">Volver</a>
+            <br>
+            {% if messages %}
+                <div id="messages">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>        
+        <div></div>
+        <div class="banner">
+            <h1 class="wel_text">Bienvenido<br/></h1>
+            <p class="para"></p>
+        </div>
+    </div>
+</body>
+</html>

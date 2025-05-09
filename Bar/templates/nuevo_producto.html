@@ -1,0 +1,135 @@
+    {% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="{% static 'css/formulario_producto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <header><h1>Registrar Nuevo Producto</h1></header>
+
+    <div class="inventory-container">
+        <div class="menu-icon" onclick="toggleMenu()"></div>
+        <div id="overlay"></div>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+        </ul>
+    </div>
+
+    {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+
+    <!-- Formulario de Registro de Producto -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required>
+        <br><br>
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" required>
+        <br><br>
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" required>
+        <br><br>
+        <label for="foto">Foto:</label>
+        <input type="file" name="foto">
+        <br><br>
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" required>
+            {% for value in categorias %}
+                <option value="{{ value.nombre }}">{{ value.nombre }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Registrar Producto</button>
+    </form>
+    <br><br>
+
+    <!-- Tabla de productos con DataTables -->
+    <table id="productos" class="display">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>{{ producto.categoria }}</td>
+                    <td>
+                        {% if producto.foto %}
+                            <img src="{{ producto.foto.url }}" alt="foto" width="100">
+                        {% else %}
+                            No hay foto
+                        {% endif %}
+                    </td>
+                    <td>
+                        <!-- Botón para editar -->
+                        <a href="{% url 'editar_producto' producto.id %}" class="btn btn-primary">Editar</a>
+                        <!-- Botón para eliminar -->
+                        <form action="{% url 'eliminar_producto' producto.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?');">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#productos').DataTable({
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ productos",
+                    "infoEmpty": "No hay productos disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ productos)",
+                    "paginate": {
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+    <script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

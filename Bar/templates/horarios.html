@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro de Horarios</title>
+    <link rel="stylesheet" href="{% static 'css/horarios.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+</head>
+<body>
+<header>
+    <h1>REGISTRO DE HORARIOS DE TRABAJO</h1>
+</header>
+<div class="inventory-container">
+    <div class="menu-icon" onclick="toggleMenu()"></div>
+    <div id="overlay"></div>
+  </div>
+  <div class="menu">
+    <ul>
+        <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+        <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+    </ul>
+  </div>
+  {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="usuario">Seleccionar Trabajador:</label>
+        <select name="usuario" required>
+            {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.apellidos }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" required />
+
+        <label for="horas_inicio">Hora Inicio:</label>
+        <input type="time" name="horas_inicio" required />
+
+        <label for="horas_fin">Hora Fin:</label>
+        <input type="time" name="horas_fin" required />
+
+        <button type="submit">Agregar Registro</button>
+    </div>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>FECHA</th>
+            <th>TRABAJADOR</th>
+            <th>HORAS TRABAJADAS</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for horario in horarios %}
+        <tr>
+            <td>{{ horario.fecha|date:"d/m/Y" }}</td>
+            <td>{{ horario.usuario.nombre }} {{ horario.usuario.apellidos }}</td>
+            <td>{{ horario.horas_trabajadas }} hrs</td>
+            <td>
+                <form method="post" action="{% url 'eliminar_horario' horario.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="boton-eliminar">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay registros aún.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('', views.primera, name="primera"),
+    path('index/', views.index, name="index"),
+    path('categoria/<int:categoria_id>/', views.vista_categoria, name='vista_categoria'),
+    path('login/', views.login, name="login"),
+    path('logout/', views.logout, name="logout"),
+    path('registro-horarios/', views.registro_horarios, name='registro_horarios'),
+    path('horarios/eliminar/<int:horario_id>/', views.eliminar_horario, name='eliminar_horario'),
+    path('crear-cuenta/', views.crear_cuenta_cliente, name='crear_cuenta_cliente'),
+    path('carrito/', views.vista_carrito, name='carrito'),
+    path('agregar_producto_carrito/', views.agregar_producto_carrito, name='agregar_producto_carrito'),
+    path('eliminar_producto_carrito/', views.eliminar_producto_carrito, name='eliminar_producto_carrito'),
+    path('finalizar_compra/', views.finalizar_compra, name='finalizar_compra'),
+    path('detalle_carrito/pdf/', views.descargar_pdf_detalle_carrito, name='descargar_pdf_detalle_carrito'),
+    path('facturas/', views.vista_factura, name='facturas'),
+    path('nuevo_producto/', views.nuevo_producto, name='nuevo_producto'),
+    path('producto/eliminar/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
+    path('producto/editar/<int:producto_id>/', views.editar_producto, name='editar_producto'),
+    # path('crear/', views.crear_producto, name='crear_producto'),
+    path('categorias/', views.lista_categorias, name='listar_categoria'),
+    path('categorias/crear/', views.crear_categoria, name='crear_categoria'),
+    path('categorias/editar/<int:categoria_id>/', views.editar_categoria, name='editar_categoria'),
+    path('categorias_eliminar/<int:categoria_id>/', views.eliminar_categoria, name='eliminar_categoria'),
+    path('fiados/', views.lista_fiados, name='lista_fiados'),
+    path('registrar_abono/<int:deuda_id>/', views.registrar_abono, name='registrar_abono'),
+    path('eliminar_cliente/<int:cliente_id>/', views.eliminar_cliente, name='eliminar_cliente'),
+    path('registro_ventas/', views.registro_ventas, name='registro_ventas'),
+    path('usuarios/crear/', views.crear_usuario, name='crear_usuario'),
+    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('usuarios/editar/<int:usuario_id>/', views.editar_usuario, name='editar_usuario'),
+    path('usuarios/eliminar/<int:usuario_id>/', views.eliminar_usuario, name='eliminar_usuario'),
+    path('password-reset/', views.password_reset_request, name='password_reset_request'),
+    path('reset-password/<uidb64>/<token>/', views.reset_password, name='reset_password'),
+]

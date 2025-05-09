@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #F3E5D7;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+body {
+    background-image: linear-gradient(135deg, #3B2C23, #1C1C1C);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+    color: #F3E5D7;
+    margin-bottom: 20px;
+}
+
+/* Inputs y Select */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    background-color: #1C1C1C;
+    border: 2px solid #9B7A59;
+    border-radius: 8px;
+    outline: none;
+    color: #F3E5D7;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus,
+select:focus {
+    border-color: #A2653B;
+    background-color: #2A1F1A;
+    box-shadow: 0 0 8px rgba(162, 101, 59, 0.5);
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #F3E5D7;
+}
+
+th {
+    background: linear-gradient(to right, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    text-transform: uppercase;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+tr:hover {
+    background-color: #2A1F1A;
+}
+
+/* Botones */
+.botones {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button, .boton-gradiente {
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+button:hover, .boton-gradiente:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    section {
+        width: 100%;
+    }
+
+    input, select {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+.filtros-fiados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filtros-fiados form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filtros-fiados label {
+    font-weight: bold;
+}

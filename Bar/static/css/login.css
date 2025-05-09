@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #F3E5D7;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(135deg, #3B2C23, #1C1C1C);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    background-color: #3B2C23;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    width: 800px;
+    max-width: 95%;
+}
+
+.banner {
+    background-color: #A2653B;
+    padding: 40px 30px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-right: 4px solid #9B7A59;
+}
+
+.banner .wel_text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #F3E5D7;
+    line-height: 1.3;
+}
+
+.banner .para {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #F3E5D7;
+}
+
+.form {
+    padding: 40px 30px;
+    width: 55%;
+    background-color: #3B2C23;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #F3E5D7;
+}
+
+.inp {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    background-color: #1C1C1C;
+    border: 2px solid #9B7A59;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #F3E5D7;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.input:focus {
+    border-color: #A2653B;
+    background-color: #2A1F1A;
+}
+
+.inp i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #D7B89E;
+    font-size: 18px;
+}
+
+.submit {
+    padding: 14px;
+    width: 100%;
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    border: none;
+    border-radius: 12px;
+    color: #F3E5D7;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.submit:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+}
+
+.link {
+    margin-top: 20px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    color: #D7B89E;
+    transition: 0.3s ease;
+}
+
+.link:hover {
+    color: #F3E5D7;
+    text-decoration: none;
+}
+
+/* Estilo para el modal de recuperación de contraseña */
+#recuperar_contrasena {
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 30px;
+    background-color: #3B2C23;
+    border: 2px solid #9B7A59;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Centrar el contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Espaciado entre los elementos */
+}
+
+#recuperar_contrasena .form {
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho del modal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espaciado entre los elementos */
+}
+
+#recuperar_contrasena .title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #F3E5D7;
+}
+
+#recuperar_contrasena .submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    border: none;
+    border-radius: 12px;
+    color: #F3E5D7;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#recuperar_contrasena .submit:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+}
+
+#recuperar_contrasena .close-modal {
+    background: none;
+    border: none;
+    color: #D7B89E;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#recuperar_contrasena .close-modal:hover {
+    color: #F3E5D7;
+}
+
+#recuperar_contrasena .form input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #1C1C1C; /* Fondo oscuro */
+    border: 2px solid #9B7A59; /* Borde */
+    border-radius: 10px;
+    font-size: 16px;
+    color: #F3E5D7; /* Color del texto */
+    outline: none;
+    transition: 0.3s ease;
+}
+
+#recuperar_contrasena .form input[type="email"]:focus {
+    border-color: #A2653B; /* Cambia el color del borde al enfocar */
+    background-color: #2A1F1A; /* Fondo más oscuro al enfocar */
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .banner, .form {
+        width: 100%;
+        border-right: none;
+        padding: 30px;
+    }
+
+    .banner {
+        border-bottom: 3px solid #9B7A59;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+}

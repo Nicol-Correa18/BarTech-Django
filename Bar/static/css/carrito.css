@@ -1,0 +1,109 @@
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-image: linear-gradient(135deg, #3B2C23, #1C1C1C);
+  color: #F3E5D7;
+  text-align: center;
+  padding: 20px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+
+
+header h1 {
+  color: #F3E5D7;
+  margin: 0;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  overflow: hidden;
+  color: #F3E5D7;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(243, 229, 215, 0.2);
+}
+
+th {
+  background: linear-gradient(to right, #A2653B, #9B7A59);
+  color: #F3E5D7;
+  text-transform: uppercase;
+}
+
+td {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+button {
+  padding: 10px 20px;
+  background: linear-gradient(145deg, #A2653B, #9B7A59);
+  border-radius: 10px;
+  color: #F3E5D7;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+button:hover {
+  background: linear-gradient(145deg, #9B7A59, #A2653B);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messages {
+  list-style: none;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.messages li {
+  background-color: #D7B89E;
+  color: #3B2C23;
+  padding: 10px;
+  border-left: 5px solid #A2653B;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+input, select {
+  border: 1px solid #9B7A59;
+  background-color: #2A1F1A;
+  color: #F3E5D7;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+input:focus, select:focus {
+  border-color: #A2653B;
+  box-shadow: 0 0 6px rgba(162, 101, 59, 0.6);
+  background-color: #3B2C23;
+}
+
+input.is-invalid, .errorlist + input {
+  border: 1px solid #D7B89E !important;
+  background-color: #1C1C1C;
+  color: #F3E5D7;
+}
+
+

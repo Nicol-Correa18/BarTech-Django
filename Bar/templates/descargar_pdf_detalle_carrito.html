@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 6px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <title>Detalle Carrito PDF</title>
+</head>
+<body>
+    <h1>Detalle del Carrito
+        BarTech-Revolution
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Mesa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.producto.nombre }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.precio }}</td>
+                <td>{{ detalle.mesa }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay detalles para mostrar.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

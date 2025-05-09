@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/crear_cuenta.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    <h2>Editar Usuario</h2>
+    {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nombre" value="{{ usuario.nombre }}" required />
+        <input type="text" name="apellidos" placeholder="Apellidos" value="{{ usuario.apellidos }}" required />
+        <input type="text" name="telefono" placeholder="Teléfono" value="{{ usuario.telefono }}" required />
+        <input type="email" name="correo" placeholder="Correo" value="{{ usuario.correo }}" required />
+        <input type="password" name="clave" placeholder="Contraseña" value="{{ usuario.clave }}" required />
+        <input type="text" name="documento" placeholder="Documento" value="{{ usuario.documento }}" required />
+        <select name="rol" required>
+            <option value="1" {% if usuario.rol == 1 %}selected{% endif %}>Empleado</option>
+            <option value="2" {% if usuario.rol == 2 %}selected{% endif %}>Administrador</option>
+        </select>
+        <input type="number" step="0.01" name="salario" placeholder="Salario" value="{{ usuario.salario }}" required />
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'listar_usuarios' %}"><button>Volver a la lista de usuarios</button></a>
+    <script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>
+

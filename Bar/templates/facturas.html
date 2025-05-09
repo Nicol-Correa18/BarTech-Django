@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 6px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    <title>Detalle Carrito PDF</title>
+</head>
+<body>
+    <h1>Detalle de la Compra</h1>
+    <p><strong>ID Carrito:</strong> {{ carrito.id }}</p>
+    <p><strong>Fecha:</strong> {{ carrito.fecha|date:"Y-m-d H:i" }}</p>
+    <p><strong>Estado:</strong> {% if carrito.estado == 1 %}Pendiente{% else %}Pagado{% endif %}</p>
+    <p><strong>Total:</strong> ${{ carrito.total }}</p>
+
+    <h3>Productos:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Mesa</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.producto.nombre }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>${{ detalle.precio }}</td>
+                <td>{{ detalle.mesa }}</td>
+                <td>${{ detalle.precio|floatformat:2|add:"0"|floatformat:2|floatformat:"2"|floatformat|mul:detalle.cantidad }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay detalles para mostrar.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

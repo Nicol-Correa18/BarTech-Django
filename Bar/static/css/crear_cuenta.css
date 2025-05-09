@@ -1,0 +1,151 @@
+body {
+    background-image: linear-gradient(135deg, #3B2C23, #1C1C1C);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #F3E5D7;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Empuja el contenido desde la parte superior */
+    align-items: center; /* Centra todo el contenido horizontalmente */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: #F3E5D7;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #D7B89E;
+  }
+  
+  th {
+    background: linear-gradient(to right, #A2653B, #9B7A59);
+    color: #FFF7F0;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+  
+  td {
+    background: #FFF7F0;
+    color: #3B2C23;
+  }
+
+  .registro-container {
+    background: linear-gradient(135deg, #A2653B, #9B7A59);
+    padding: 30px;
+    border-radius: 12px;
+    border: 3px solid #D7B89E;
+    box-shadow: 0 0 30px rgba(211, 185, 158, 0.8);
+    max-width: 650px;
+    width: 90%;
+    margin-top: 55px;
+    transition: all 0.3s ease-in-out;
+
+    /* Flexbox para centrar contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.registro-container h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #F3E5D7;
+    text-align: center;
+}
+
+.registro-container input,
+.registro-container select {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 600px; /* Limita el ancho máximo */
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    background: #D7B89E;
+    color: #3B2C23;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.registro-container input::placeholder,
+.registro-container select {
+    color: #36200a;
+}
+
+.registro-container input:focus,
+.registro-container select:focus {
+    background: #F3E5D7;
+    box-shadow: 0 0 15px rgba(243, 229, 215, 0.7);
+    border: 2px solid #A2653B;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button {
+    padding: 12px 25px;
+    background: linear-gradient(to right, #A2653B, #D7B89E);
+    border-radius: 10px;
+    color: #3B2C23;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(162, 101, 59, 0.5);
+}
+
+button:hover {
+    background: linear-gradient(to right, #D7B89E, #A2653B);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(162, 101, 59, 0.7);
+}
+
+input[type="text"], input[type="number"], input[type="email"], input[type="password"], select {
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 100%; /* Asegurarse de que los campos ocupen todo el ancho */
+    background-color: #a18066; /* Fondo oscuro para entradas */
+    color: rgb(0, 0, 0);
+    border: 1px solid #A2653B;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type="submit"], button {
+    padding: 12px 25px;
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #A2653B;
+}
+
+#volver_usuarios {
+    color: white;
+    text-decoration: none;
+}

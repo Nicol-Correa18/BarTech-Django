@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+<div class="container">
+    <header><h1>Carrito de Compras</h1></header>
+    
+    <div class="inventory-container">
+        <div class="menu-icon" onclick="toggleMenu()"></div>
+        <div id="overlay"></div>
+      </div>
+      <div class="menu">
+        <ul>
+            <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+        </ul>
+      </div>
+
+    {% if carrito %}
+    <table>
+        <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for producto_id, item in carrito.items %}
+        <tr>
+            <td>{{ item.nombre }}</td> 
+            <td>{{ item.precio }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.subtotal }}</td>
+            <td>
+                <form action="{% url 'eliminar_producto_carrito' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="{{ producto_id }}">
+                    <button type="submit">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: ${{ total_general|floatformat:2 }}</h3>
+    <form method="POST" action="{% url 'finalizar_compra' %}">
+        {% csrf_token %}
+        <label for="mesa">Seleccione la mesa:</label>
+        <input type="number" name="mesa" min="1" required>
+        <button type="submit">Continuar con la compra</button>
+    </form>
+    {% else %}
+        <p>No hay productos en el carrito.</p>
+    {% endif %}
+    
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/mensajes.js' %}"></script>
+</body>
+</html>

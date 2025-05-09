@@ -1,0 +1,178 @@
+* {
+    color: white;
+}
+
+/* Estilos generales para el cuerpo de la página */
+body {
+    background-color: #2e1e18; /* Fondo oscuro */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white; /* Texto claro */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* Cabecera de la página */
+h1, h2 {
+    color: #f0e3d1; /* Color claro para los títulos */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Botón "Volver" */
+.btn, .custom-button {
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: #F3E5D7;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover, .custom-button:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+}
+
+.custom-button a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Alinear el contenedor con "Mostrar" y "Buscar" */
+.form-container {
+    width: 80%; /* Ajustar para que la página no sea tan ancha */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los campos "Mostrar" y "Buscar" */
+.select-container, .search-container {
+    width: 48%; /* Alinearlos dentro del contenedor */
+    color: white;
+}
+
+/* Ajuste de los inputs, selects y fecha */
+input[type="text"], input[type="number"], input[type="date"], select {
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 100%; /* Asegurarse de que los campos ocupen todo el ancho */
+    background-color: #4a3c31; /* Fondo oscuro para entradas */
+    color: white;
+    border: 1px solid #A2653B;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type="submit"], button {
+    padding: 12px 25px;
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #A2653B;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%; /* Ajustar para que la tabla no sea tan grande */
+    max-width: 900px; /* Establecer un tamaño máximo */
+    margin-top: 30px;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #4a3c31; /* Fondo oscuro para la tabla */
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(230, 227, 227, 0.1); /* Sombra suave */
+}
+
+/* Estilo de las celdas y encabezados */
+th, td {
+    padding: 15px; /* Ajuste del espacio para que las celdas no se vean apretadas */
+    text-align: left;
+    border: 1px solid #A2653B;
+    font-weight: normal;
+}
+
+/* Encabezado de la tabla */
+th {
+    background-color: #A2653B;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    min-width: 300px;
+}
+
+/* Estilo de las filas */
+td {
+    background-color: #4a3c31;
+}
+
+tr:nth-child(even) {
+    background-color: #3c2d22;
+}
+
+tr:hover {
+    background-color: #5b4a38; /* Resaltar fila al pasar el cursor */
+}
+
+/* Estilo para las imágenes */
+td img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Estilo para la búsqueda */
+.search-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #A2653B;
+    background-color: #4a3c31;
+    color: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #A2653B;
+    box-shadow: 0 0 8px rgba(214, 159, 96, 0.3);
+}
+
+/* Estilo para el selector "Mostrar" */
+select {
+    background-color: #4a3c31;
+    color: #f0e3d1;
+    border: 1px solid #A2653B;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+select:focus {
+    border-color: #A2653B;
+    box-shadow: 0 0 8px rgba(214, 159, 96, 0.3);
+}

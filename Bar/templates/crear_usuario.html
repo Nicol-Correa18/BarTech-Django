@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/crear_cuenta.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    <h2>Crear Usuario</h2>
+
+    <div class="inventory-container">
+        <div class="menu-icon" onclick="toggleMenu()"></div>
+        <div id="overlay"></div>
+      </div>
+      <div class="menu">
+        <ul>
+            <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
+            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+            <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+        </ul>
+      </div>
+      {% if messages %}
+      <div id="messages">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+  <div class="registro-container">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellidos" placeholder="Apellidos" required>
+        <input type="text" name="telefono" placeholder="Teléfono" required>
+        <input type="email" name="correo" placeholder="Correo" required>
+        <input type="password" name="clave" placeholder="Contraseña" required>
+        <input type="text" name="documento" placeholder="Documento" required>
+        <select name="rol" required>
+            <option value="1">Empleado</option>
+            <option value="2">Administrador</option>
+        </select>
+        <input type="number" name="salario" placeholder="Salario" required>
+        <button type="submit">Crear Usuario</button>
+    </form>
+    <button><a href="{% url 'listar_usuarios' %}" id="volver_usuarios">Volver a la lista de usuarios</a></button>
+</div>
+    <script src="{% static 'js/mensajes.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
