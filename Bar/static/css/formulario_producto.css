@@ -208,3 +208,25 @@ select:focus {
     box-shadow: 0 0 8px rgba(214, 159, 96, 0.3);
 }
 
+button {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #A2653B, #9B7A59);
+    border-radius: 10px;
+    color: #F3E5D7;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  button:hover {
+    background: linear-gradient(145deg, #9B7A59, #A2653B);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  }
+
+button a {
+    color: #FFFFFF; /* Cambia el color del enlace dentro del botón */
+    text-decoration: none; /* Elimina el subrayado */
+} 

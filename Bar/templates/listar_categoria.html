@@ -6,8 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categoría</title>
-    <link rel="stylesheet" href="{% static 'css/nueva_categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'css/formulario_producto.css' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <h1>Lista de Categorías</h1>
@@ -17,16 +20,16 @@
   </div>
   <div class="menu">
     <ul>
-        <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
-        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
-        <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
-        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
-        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
-        <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
-        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
-        <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
-        {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
-        <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+          <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
     </ul>
   </div>
   {% if messages %}
@@ -40,9 +43,10 @@
   {% endif %}
 <form method="POST" action="{% url 'listar_categoria' %}" class="form-inline mb-3">
     {% csrf_token %}
-    <button><a href="{% url 'crear_categoria' %}" class="btn btn-success ml-2">Crear Categoría</a></button>
+    <button><a href="{% url 'crear_categoria' %}">Crear Categoría</a></button>
 </form>
-<table class="table table-striped">
+<br><br>
+<table id="productos" class="display">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -62,8 +66,8 @@
                     {% endif %}
                 </td>
  <td>
-                    <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-warning btn-sm"><button>Editar</button></a>
-                    <a href="{% url 'eliminar_categoria' categoria.id %}" class="btn btn-danger btn-sm"><button>Eliminar</button></a>
+                    <a href="{% url 'editar_categoria' categoria.id %}"><button>Editar</button></a> |
+                    <a href="{% url 'eliminar_categoria' categoria.id %}"><button>Eliminar</button></a>
                 </td>
             </tr>
 {% empty %}
@@ -74,6 +78,26 @@
     </tbody>
 </table>
 {% endblock %}
+    <script>
+        $(document).ready(function() {
+            var table = $('#productos').DataTable({
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ productos",
+                    "infoEmpty": "No hay productos disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ productos)",
+                    "paginate": {
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
 <script src="{% static 'js/mensajes.js' %}"></script>
 </body>
 </html>

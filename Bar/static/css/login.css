@@ -133,9 +133,14 @@ body {
     text-decoration: none;
 }
 
-/* Estilo para el modal de recuperación de contraseña */
+/* Agregar al final de tu CSS */
+
+/* Modal de recuperación de contraseña centrado */
 #recuperar_contrasena {
-    transform: translate(-50%, -50%);
+    position: absolute; /* Posiciona el modal de forma absoluta */
+    top: 50%; /* Posiciona al 50% desde la parte superior */
+    left: 50%; /* Posiciona al 50% desde la izquierda */
+    transform: translate(-50%, -50%); /* Ajusta para centrarlo de manera precisa */
     width: 400px;
     padding: 30px;
     background-color: #3B2C23;

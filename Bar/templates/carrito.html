@@ -26,16 +26,16 @@
       </div>
       <div class="menu">
         <ul>
-            <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
-            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
-            <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
-            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
-            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
-            <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
-            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
-            <li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>
-            {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
-            <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
+          <li><button class="custom-button"><a href="{% url 'index' %}">Inicio</a></button></li> 
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_horarios' %}">Horarios</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'lista_fiados' %}">Deben</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'nuevo_producto' %}">Nuevo producto</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_categoria' %}">Nueva categoría</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'carrito' %}">Carrito</a></button></li>
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'listar_usuarios' %}">Usuarios</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'descargar_pdf_detalle_carrito' %}">Facturas</a></button></li>{% endif %}
+          {% if request.session.path.rol == 2 %}<li><button class="custom-button"><a href="{% url 'registro_ventas' %}">Registro de Ventas</a></button></li>{% endif %}
+          <li><button class="custom-button"><a href="{% url 'logout' %}">Cerrar Sesión</a></button></li>
         </ul>
       </div>
 
