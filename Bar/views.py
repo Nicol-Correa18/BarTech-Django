@@ -15,6 +15,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+from django.db import IntegrityError
 
 
 def primera(request):
@@ -149,40 +150,63 @@ def reset_password(request, uidb64, token):
         messages.error(request, "El enlace de recuperación no es válido o ha expirado.")
         return redirect('password_reset_request')
 
+from decimal import InvalidOperation
+
 def crear_cuenta_cliente(request):
     if request.method == "POST":
-        nombre = request.POST.get('nombreCliente').lower()
-        apellidos = request.POST.get('apellidos')
-        telefono = request.POST.get('telefono')
-        total_fiado = request.POST.get('totalFiado')
-        cliente = get_object_or_404(Cliente, nombre=nombre).lower()
-        if cliente:
-            # Si existe, actualizar el restante
-            cliente.restante += Decimal(total_fiado)
-            cliente.deben += Decimal(total_fiado)  # Opcional: actualizar el total de deuda
-            cliente.save()
-            messages.success(request, f"El cliente '{nombre}' ya existe. Se actualizó su restante.")
+        nombre = request.POST.get('nombreCliente', '').strip().upper()
+        apellidos = request.POST.get('apellidos', '').strip().upper()
+        telefono = request.POST.get('telefono', '').strip()
+        total_fiado = request.POST.get('totalFiado', '').strip()
+
+        # Validar que los campos requeridos no estén vacíos
+        if not nombre or not apellidos or not total_fiado:
+            messages.error(request, "Por favor, completa todos los campos obligatorios.")
+            return redirect('crear_cuenta_cliente')
+
+        try:
+            # Intentar convertir total_fiado a Decimal
+            total_fiado = Decimal(total_fiado)
+            if total_fiado <= 0:
+                messages.error(request, "El monto fiado debe ser mayor a 0.")
+                return redirect('crear_cuenta_cliente')
+        except InvalidOperation:
+            messages.error(request, "Por favor, ingresa un monto válido para el total fiado.")
+            return redirect('crear_cuenta_cliente')
+
+        # Buscar si el cliente ya existe
+        cliente = Cliente.objects.filter(nombre=nombre, apellidos=apellidos).first()
+
+        try:
+            if cliente:
+                # Si el cliente existe, actualizar sus datos
+                cliente.restante += total_fiado
+                cliente.deben += total_fiado
+                cliente.save()
+                messages.success(request, f"El cliente '{nombre} {apellidos}' ya existe. Se actualizó su restante.")
+            else:
+                # Crear un nuevo cliente
+                cliente = Cliente.objects.create(
+                    nombre=nombre,
+                    apellidos=apellidos,
+                    telefono=telefono,
+                    deben=total_fiado,
+                    abonos=Decimal('0.00'),
+                    restante=total_fiado
+                )
+
+                # Crear la deuda asociada al cliente
+                Deuda.objects.create(
+                    cliente=cliente,
+                    abonos=Decimal('0.00'),
+                    restante=total_fiado
+                )
+                messages.success(request, f"El cliente '{nombre} {apellidos}' fue creado exitosamente.")
+            
             return redirect('lista_fiados')
-        else:
-
-            # Crear el cliente
-            cliente = Cliente.objects.create(
-                nombre=nombre,
-                apellidos=apellidos,
-                telefono=telefono,
-                deben=Decimal(total_fiado),  # Asegúrate de convertir a Decimal
-                abonos=Decimal('0.00'),  # Inicializar abonos a 0
-                restante=Decimal(total_fiado)  # Inicializar restante al total fiado
-            )
-
-            # Crear la deuda asociada al cliente
-            Deuda.objects.create(
-                cliente=cliente,
-                abonos=Decimal('0.00'),  # Inicializar abonos a 0
-                restante=Decimal(total_fiado)  # Inicializar restante al total fiado
-            )
-
-            return redirect('lista_fiados')  
+        except Exception as e:
+            messages.error(request, f"Error al procesar la solicitud: {str(e)}")
+            return redirect('crear_cuenta_cliente')
 
     return render(request, 'crear_cuenta.html')
 
@@ -216,22 +240,30 @@ def lista_fiados(request):
 
     return render(request, 'fiados1.html', {'datos_clientes': datos_clientes})
 
-
-
-def eliminar_cliente(request, cliente_id):
+def eliminar_cliente(request, deuda_id):
     # Verificar si el usuario tiene el rol de administrador
     usuario = request.session.get('path', None)
-    if not usuario or usuario.get('rol') != 2:  # Suponiendo que 'rol=1' es el administrador
+    if not usuario or usuario.get('rol') != 2:  # Suponiendo que 'rol=2' es el administrador
         messages.error(request, "No tienes permiso para acceder a esta página.")
         return redirect('index')  # Redirigir a una página adecuada
-    
+
     try:
-        cliente = get_object_or_404(Cliente, id=cliente_id)
-        cliente.delete()
-        return redirect('lista_fiados')
+        # Obtener la deuda específica
+        deuda = get_object_or_404(Deuda, id=deuda_id)
+
+        # Verificar si el restante de la deuda es igual a cero
+        if deuda.restante != 0:
+            messages.error(request, "No se puede eliminar la deuda porque aún tiene un saldo pendiente.")
+            return redirect('lista_fiados')
+
+        # Eliminar la deuda
+        deuda.delete()
+        messages.success(request, 'Deuda eliminada exitosamente.')
+    except Deuda.DoesNotExist:
+        messages.error(request, "La deuda no existe.")
     except Exception as e:
-        messages.error(request, "No se puede eliminar el cliente porque tiene deudas asociadas.")
-        return redirect('lista_fiados')
+        messages.error(request, f"Error inesperado: {str(e)}")
+    return redirect('lista_fiados')
 
 
 def registrar_abono(request, deuda_id):
@@ -369,29 +401,38 @@ def agregar_producto_carrito(request):
     if request.method == 'POST':
         producto_id = request.POST.get('producto_id')
         cantidad = int(request.POST.get('cantidad', 1))
-        producto = Producto.objects.get(id=producto_id)
+        producto = get_object_or_404(Producto, id=producto_id)
 
+        # Validar que la cantidad sea mayor a 0
         if cantidad <= 0:
             messages.error(request, "La cantidad debe ser al menos 1.")
             return redirect('carrito')
-        carrito = request.session.get('carrito', {})
 
+        # Validar que la cantidad no sea mayor al stock disponible
         if cantidad > producto.stock:
             messages.error(request, f"No hay suficiente stock para '{producto.nombre}'. Stock disponible: {producto.stock}.")
             return redirect('carrito')
+
+        # Obtener el carrito de la sesión
+        carrito = request.session.get('carrito', {})
+
+        # Si el producto ya está en el carrito, actualizar la cantidad
         if producto_id in carrito:
             carrito[producto_id]['cantidad'] += cantidad
+            # Validar nuevamente que la cantidad total no exceda el stock
             if carrito[producto_id]['cantidad'] > producto.stock:
-                messages.error(request, f"No hay suficiente stock para '{producto.nombre}'. Stock disponible: {producto.stock}.")
                 carrito[producto_id]['cantidad'] = producto.stock
+                messages.error(request, f"No hay suficiente stock para '{producto.nombre}'. Stock disponible: {producto.stock}.")
                 return redirect('carrito')
         else:
+            # Agregar el producto al carrito
             carrito[producto_id] = {
                 'nombre': producto.nombre,
                 'cantidad': cantidad,
                 'precio': float(producto.precio)
             }
 
+        # Guardar el carrito en la sesión
         request.session['carrito'] = carrito
         messages.success(request, f"Producto '{producto.nombre}' añadido al carrito.")
 

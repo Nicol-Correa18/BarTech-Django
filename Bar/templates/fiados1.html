@@ -69,7 +69,8 @@
                       <td>${{ item.abonos }}</td>
                       <td>${{ item.restante }}</td>
                       <td>
-                          <a href="{% url 'registrar_abono' item.deuda_id %}" class="boton-gradiente">Abonar deuda</a>
+                        <a href="{% url 'eliminar_cliente' item.deuda_id %}" class="boton-gradiente">Eliminar</a>
+                        <a href="{% url 'registrar_abono' item.deuda_id %}" class="boton-gradiente">Abonar deuda</a>
                       </td>
                   </tr>
               {% endfor %}
