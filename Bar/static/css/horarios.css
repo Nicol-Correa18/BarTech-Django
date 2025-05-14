@@ -20,6 +20,7 @@ header h1 {
   font-size: 32px;
   letter-spacing: 1px;
   color: #F3E5D7;
+  margin-bottom: 20px;
 }
 
 .flash-messages {
@@ -153,5 +154,129 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Media queries para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  body {
+      padding: 20px 10px; /* Reduce el padding en pantallas pequeñas */
+  }
+
+  header h1 {
+      font-size: 24px; /* Reduce el tamaño del título */
+  }
+
+  .flash-messages {
+      padding: 10px; /* Reduce el padding de los mensajes */
+      font-size: 14px; /* Reduce el tamaño de la fuente */
+  }
+
+  table {
+      font-size: 12px; /* Reduce el tamaño de la fuente en la tabla */
+  }
+
+  th, td {
+      padding: 8px; /* Reduce el padding de las celdas */
+  }
+
+  div {
+      flex-direction: column; /* Cambia la disposición a una columna */
+      gap: 10px; /* Reduce el espacio entre los elementos */
+  }
+
+  input, select, button {
+      width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+      font-size: 14px; /* Reduce el tamaño de la fuente */
+  }
+
+  button {
+      padding: 10px; /* Reduce el padding de los botones */
+  }
+}
+
+/* Media queries para pantallas medianas (tabletas) */
+@media (max-width: 1024px) {
+  body {
+      padding: 30px 15px; /* Ajusta el padding para tabletas */
+  }
+
+  header h1 {
+      font-size: 28px; /* Ajusta el tamaño del título */
+  }
+
+  .flash-messages {
+      max-width: 600px; /* Reduce el ancho máximo de los mensajes */
+  }
+
+  table {
+      font-size: 14px; /* Ajusta el tamaño de la fuente en la tabla */
+  }
+
+  th, td {
+      padding: 10px; /* Ajusta el padding de las celdas */
+  }
+
+  div {
+      gap: 15px; /* Ajusta el espacio entre los elementos */
+  }
+}
+
+/* Estilo base para el menú */
+.menu {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si no hay suficiente espacio */
+  gap: 15px; /* Espaciado entre los botones */
+  margin-bottom: 20px; /* Espaciado debajo del menú */
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  gap: 10px; /* Espaciado entre los elementos del menú */
+}
+
+.menu ul li {
+  display: inline-block;
+}
+
+.menu button {
+  padding: 10px 20px;
+  background: linear-gradient(to right, #A2653B, #9B7A59);
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(162, 101, 59, 0.4);
+}
+
+.menu button:hover {
+  background: linear-gradient(to right, #9B7A59, #A2653B);
+  transform: scale(1.05);
+}
+
+/* Media query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .menu {
+      flex-direction: column; /* Cambia el menú a una columna */
+      align-items: center; /* Centra los elementos en la columna */
+      gap: 10px; /* Reduce el espacio entre los botones */
+  }
+
+  .menu ul {
+      flex-direction: column; /* Cambia los elementos del menú a una columna */
+      gap: 10px;
+  }
+
+  .menu button {
+      width: 100%; /* Los botones ocupan todo el ancho disponible */
+      text-align: center;
   }
 }

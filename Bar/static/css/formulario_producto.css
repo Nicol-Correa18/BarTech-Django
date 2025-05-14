@@ -93,55 +93,86 @@ input[type="submit"]:hover, button:hover {
     background-color: #A2653B;
 }
 
+
+/* Contenedor para hacer la tabla responsiva */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
+    margin-top: 20px;
+}
+
 /* Estilos para la tabla */
 table {
-    width: 100%; /* Ajustar para que la tabla no sea tan grande */
-    max-width: 900px; /* Establecer un tamaño máximo */
-    margin-top: 30px;
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 14px; /* Reduce el tamaño de la fuente para mayor compactación */
     background-color: #4a3c31; /* Fondo oscuro para la tabla */
     color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(230, 227, 227, 0.1); /* Sombra suave */
+    overflow: hidden;
 }
 
-/* Estilo de las celdas y encabezados */
-th, td {
-    padding: 15px; /* Ajuste del espacio para que las celdas no se vean apretadas */
-    text-align: left;
-    border: 1px solid #A2653B;
-    font-weight: normal;
-}
-
-/* Encabezado de la tabla */
+/* Encabezados de la tabla */
 th {
     background-color: #A2653B;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    min-width: 300px;
+    padding: 10px; /* Reduce el padding para mayor compactación */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
-/* Estilo de las filas */
+/* Celdas de la tabla */
 td {
     background-color: #4a3c31;
+    padding: 8px; /* Reduce el padding para mayor compactación */
+    text-align: center;
+    border: 1px solid #A2653B;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
+/* Estilo para las filas alternas */
 tr:nth-child(even) {
     background-color: #3c2d22;
 }
 
 tr:hover {
-    background-color: #5b4a38; /* Resaltar fila al pasar el cursor */
+    background-color: #5b4a38; /* Resalta la fila al pasar el cursor */
 }
 
 /* Estilo para las imágenes */
 td img {
-    width: 85px;
-    height: 85px;
+    width: 60px; /* Reduce el tamaño de las imágenes */
+    height: 60px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+/* Ajuste para los botones de acción */
+td button {
+    padding: 5px 10px; /* Reduce el tamaño de los botones */
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 12px; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+        padding: 5px; /* Reduce el padding en pantallas pequeñas */
+    }
+
+    td img {
+        width: 50px; /* Reduce aún más el tamaño de las imágenes */
+        height: 50px;
+    }
+
+    td button {
+        font-size: 10px; /* Ajusta el tamaño de los botones */
+        padding: 3px 8px;
+    }
 }
 
 /* Estilo para la búsqueda */
@@ -176,3 +207,4 @@ select:focus {
     border-color: #A2653B;
     box-shadow: 0 0 8px rgba(214, 159, 96, 0.3);
 }
+
